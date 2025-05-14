@@ -1,263 +1,181 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portfolio</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="mediaqueries.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body>
-  <!-- Desktop Navigation -->
-  <nav id="desktop-nav">
-    <div class="logo">Danny Nguyen</div>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
+<style>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+<body class="font-sans bg-white text-gray-800">
+  <!-- Navigation -->
+  <nav x-data="{ open: false }" class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-white/80 dark:bg-gray-900 dark:text-white shadow-md px-6 py-4">
+    <div class="flex justify-between items-center">
+      <div><a href="#profile" class="text-2xl font-semibold">Danny Nguyen</a></div>
+      <div class="md:hidden">
+        <button @click="open = !open" class="text-3xl focus:outline-none">&#9776;</button>
+      </div>
+      <ul class="hidden md:flex gap-8 text-lg">
+        <li><a href="#about" class="hover:text-blue-200 font-medium">About</a></li>
+        <li><a href="#experience" class="hover:text-blue-300 font-medium">Experience</a></li>
+        <li><a href="#projects" class="hover:text-blue-400 font-medium">Projects</a></li>
+        <li><a href="#contact" class="hover:text-blue-500 font-medium">Contact</a></li>
+      </ul>
+    </div>
+    <ul :class="open ? 'flex flex-col gap-4 mt-4' : 'hidden'" class="md:hidden text-lg text-center">
+      <li><a href="#about" class="hover:text-blue-200 font-medium">About</a></li>
+      <li><a href="#experience" class="hover:text-blue-300 font-medium">Experience</a></li>
+      <li><a href="#projects" class="hover:text-blue-400 font-medium">Projects</a></li>
+      <li><a href="#contact" class="hover:text-blue-500 font-medium">Contact</a></li>
     </ul>
   </nav>
 
-  <!-- Hamburger Navigation -->
-  <nav id="hamburger-nav">
-    <div class="logo">Danny Nguyen</div>
-    <div class="hamburger-menu">
-      <div class="hamburger-icon" onclick="toggleMenu()">
-        <span></span><span></span><span></span>
+  <div class="pt-32"> <!-- increased padding to account for taller fixed navbar -->
+    <!-- Profile Section -->
+    <section id="profile" class="flex flex-col md:flex-row items-center justify-center h-screen gap-10 px-8">
+      <div class="w-64 h-64">
+        <img src="assets/images/best.webp" alt="Danny profile picture" class="rounded-full object-cover w-full h-full" />
       </div>
-      <ul class="menu-links">
-        <li><a href="#about" onclick="toggleMenu()">About</a></li>
-        <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
-        <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
-        <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <!-- Profile Section -->
-  <section id="profile">
-    <div class="section__pic-container">
-      <img src="assets/images/best.webp" alt="Danny profile picture" />
-    </div>
-    <div class="section__text">
-      <p class="section__text__p1">Hello, I'm</p>
-      <h1 class="title">Danny Nguyen</h1>
-      <p class="section__text__p2">Entry Frontend Developer / Software Programmer</p>
-      <div class="btn-container">
-        <button class="btn btn-color-2" onclick="window.open('assets/images/Danny_Nguyen_Resume.pdf')">Download Resume</button>
-        <button class="btn btn-color-1" onclick="location.href='#contact'">Contact Info</button>
+      <div class="text-center md:text-left">
+        <p class="text-lg font-semibold">Hello, I'm</p>
+        <h1 class="text-4xl font-bold my-2">Danny Nguyen</h1>
+        <p class="text-xl text-gray-600 mb-4">Entry Frontend Developer / Software Programmer</p>
+        <div class="flex gap-4 justify-center md:justify-start">
+          <a href="assets/images/Danny_Nguyen_Resume.pdf" class="bg-gray-800 text-white px-4 py-2 rounded-full hover:bg-black transition">Download Resume</a>
+          <a href="#contact" class="border border-gray-800 px-4 py-2 rounded-full hover:bg-gray-800 hover:text-white transition">Contact Info</a>
+        </div>
+        <div class="flex gap-4 justify-center md:justify-start mt-4">
+          <img src="assets/images/linkedin.png" alt="LinkedIn" class="w-8 h-8 cursor-pointer" onclick="location.href='https://www.linkedin.com/in/danny-nguyen-693b4a1b9/'" />
+          <img src="assets/images/github.png" alt="GitHub" class="w-8 h-8 cursor-pointer" onclick="location.href='https://github.com/Danny080298'" />
+        </div>
       </div>
-      <div id="socials-container">
-        <img src="assets/images/linkedin.png" alt="LinkedIn profile" class="icon" onclick="location.href='https://www.linkedin.com/in/danny-nguyen-693b4a1b9/'" />
-        <img src="assets/images/github.png" alt="GitHub profile" class="icon" onclick="location.href='https://github.com/Danny080298'" />
-      </div>
-    </div>
-  </section>
+    </section>
 
   <!-- About Section -->
-  <section id="about">
-    <p class="section__text__p1">Get to know more</p>
-    <h1 class="title">About Me</h1>
-  
-    <div class="section-container">
-      <div class="section__pic-container">
-        <img src="assets/images/best.webp" alt="profile picture" class="about-pic" />
-      </div>
-  
-      <div class="about-details-container">
-        <div class="about-containers">
-          <div class="details-container">
-            <img src="assets/images/experience.png" alt="experience icon" class="icon" />
-            <h3>Experience</h3>
-            <p>Entry Level<br />Frontend Development</p>
-            <p> 1 Year <br /> Software Programmer</p>
-            <p> 1 Year <br /> Computer Technician</p>
+  <section id="about" class="py-20 px-8">
+    <div class="text-center">
+      <p class="text-lg text-gray-600">Get to know more</p>
+      <h2 class="text-4xl font-bold">About Me</h2>
+    </div>
+    <div class="mt-12 flex flex-col md:flex-row gap-12 items-center">
+      <img src="assets/images/best.webp" alt="profile" class="w-64 h-64 rounded-2xl object-cover" />
+      <div class="space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="border p-4 rounded-xl text-center">
+            <img src="assets/images/experience.png" class="w-8 h-8 mx-auto mb-2" />
+            <h3 class="font-semibold text-lg">Experience</h3>
+            <p class="text-sm">Entry Level - Frontend Development</p>
+            <p class="text-sm">1 Year - Software Programmer</p>
+            <p class="text-sm">1 Year - Computer Technician</p>
           </div>
-          <div class="details-container">
-            <img src="assets/images/education.png" alt="education icon" class="icon" />
-            <h3>Education</h3>
-            <p>Bachelor's Degree in Computer Science<br />Associate's Degree in Computer Engineering</p>
+          <div class="border p-4 rounded-xl text-center">
+            <img src="assets/images/education.png" class="w-8 h-8 mx-auto mb-2" />
+            <h3 class="font-semibold text-lg">Education</h3>
+            <p class="text-sm">Bachelor's in Computer Science<br>Associate's in Computer Engineering</p>
           </div>
         </div>
-        <div class="text-container">
-          <p>
-            A full-time student at the University of Memphis, deeply immersed in the study of computer science with a focus on software
-            development. Academic journey complemented by hands-on involvement in Python code projects, honing skills in
-            programming and problem-solving. The expected graduation date is May 2025.          </p>
-        </div>
+        <p class="text-gray-700">
+          A full-time student at the University of Memphis, deeply immersed in the study of computer science with a focus on software
+          development. Academic journey complemented by hands-on involvement in Python code projects, honing skills in
+          programming and problem-solving. The expected graduation date is May 2025.
+        </p>
       </div>
     </div>
-  
-    <img src="assets/images/arrow.png" alt="arrow icon" class="icon arrow" onclick="location.href='#experience'" />
   </section>
 
   <!-- Experience Section -->
-  <section id="experience">
-    <p class="section__text__p1">Explore My</p>
-    <h1 class="title">Experience</h1>
-    <div class="experience-details-container">
-        <div class="about-containers"> 
-            <div class="details-container">
-                <h2 class="experience-sub-title">Frontend Development</h2>
-                <div class="article-container">
-                    <article>
-                        <img src="assets/images/checkmark.png" alt="experience icon" class="icon"/>
-                    <div>
-                        <h3>HTML</h3>
-                        <p>Experienced</p>
-                    </div>
-                    </article>
-                    <article>
-                        <img src="assets/images/checkmark.png" alt="experience icon" class="icon"/>
-                    <div>
-                        <h3>CSS</h3>
-                        <p>Experienced</p>
-                    </div>
-                    </article>
-                    <article>
-                        <img src="assets/images/checkmark.png" alt="experience icon" class="icon"/>
-                    <div>
-                        <h3>Javascript</h3>
-                        <p>Basic</p>
-                    </div>
-                    </article>
-                    <article>
-                        <img src="assets/images/checkmark.png" alt="experience icon" class="icon"/>
-                    <div>
-                        <h3>Bootstrap</h3>
-                        <p>Experienced</p>
-                    </div>
-                    </article>
-                </div>
-            </div>
-            <div class="details-container">
-                <h2 class="experience-sub-title">Software Programmer</h2>
-                <div class="article-container">
-                    <article>
-                        <img src="assets/images/checkmark.png" alt="experience icon" class="icon"/>
-                    <div>
-                        <h3>Python</h3>
-                        <p>Experienced</p>
-                    </div>
-                    </article>
-                    <article>
-                        <img src="assets/images/checkmark.png" alt="experience icon" class="icon"/>
-                    <div>
-                        <h3>C++</h3>
-                        <p>Intermediate</p>
-                    </div>
-                    </article>
-                    <article>
-                        <img src="assets/images/checkmark.png" alt="experience icon" class="icon"/>
-                    <div>
-                        <h3>PostgreSQL</h3>
-                        <p>Intermediate</p>
-                    </div>
-                    </article>
-                    <article>
-                        <img src="assets/images/checkmark.png" alt="experience icon" class="icon"/>
-                    <div>
-                        <h3>Ruby & Rails</h3>
-                        <p>Experienced</p>
-                    </div>
-                    </article>
-                    <article>
-                        <img src="assets/images/checkmark.png" alt="experience icon" class="icon"/>
-                    <div>
-                        <h3>R Studio</h3>
-                        <p>Experienced</p>
-                    </div>
-                    </article>
-                    <article>
-                        <img src="assets/images/checkmark.png" alt="experience icon" class="icon"/>
-                    <div>
-                        <h3>GitHub</h3>
-                        <p>Experienced</p>
-                    </div>
-                    </article>
-                </div>
-            </div>
-            <div class="details-container">
-                <h2 class="experience-sub-title">Computer Engineering</h2>
-                <div class="article-container">
-                    <article>
-                        <img src="assets/images/checkmark.png" alt="experience icon" class="icon"/>
-                    <div>
-                        <h3>Repair and Testing</h3>
-                        <p>Experienced</p>
-                    </div>
-                    </article>
-                    <article>
-                        <img src="assets/images/checkmark.png" alt="experience icon" class="icon"/>
-                    <div>
-                        <h3>Debugging</h3>
-                        <p>Experienced</p>
-                    </div>
-                    </article>
-                    <article>
-                        <img src="assets/images/checkmark.png" alt="experience icon" class="icon"/>
-                    <div>
-                        <h3>Inspection</h3>
-                        <p>Experienced</p>
-                    </div>
-                    </article>
-                    
-                </div>
-            </div>
-        </div>
+  <section id="experience" class="py-20 px-8 bg-gray-50">
+    <div class="text-center mb-12">
+      <p class="text-lg text-gray-600">Explore My</p>
+      <h2 class="text-4xl font-bold">Experience</h2>
     </div>
-    <img src="assets/images/arrow.png" alt="arrow icon" class="icon arrow" onclick="location.href='#projects'" />
-
-  </section>
-  
-  <!--Projects Section-->
-  <section id="projects">
-    <p class="section__text__p1">Browse my recent</p>
-    <h1 class="title">Projects</h1>
-    <div class="experience-details-container">
-        <div class="about-containers">
-            <div class="details-container color-container">
-        
-                <div class="article-container">
-                    <img src="assets/images/project1.png" alt="project 1" class="project1 img"/>
-                </div>
-                <h2 class="experience-sub-title project-title">Gratitude 10q Tigers</h2>
-                <div class="btn-container">
-                    <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/uofm-capstone/fall2024_10q_tigers'">
-                        Github
-                    </button>
-                </div>
-            </div>
-            <div class="details-container color-container">
-                <div class="article-container">
-                    <img src="assets/images/project2.png" alt="project 2" class="project2 img"/>
-                </div>
-                <h2 class="experience-sub-title project-title">Sensing Hexa</h2>
-                <div class="btn-container">
-                    <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/Danny080298/Sensing'">
-                        Github
-                    </button>
-                </div>
-            
-            </div>
-            <div class="details-container color-container">
-                <div class="article-container">
-                    <img src="" alt="project 3" class="project3 img"/>
-                </div>
-                <h2 class="experience-sub-title project-title">In coming ...</h2>
-                <div class="btn-container">
-                    <button class="btn btn-color-2 project-btn" onclick="location.href=''">
-                        Github
-                    </button>
-                </div>
-            
-            </div>
-        </div>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="bg-white shadow rounded-lg p-6">
+        <h3 class="text-xl font-semibold mb-4 text-center">Frontend Development</h3>
+        <ul class="space-y-2">
+          <li>HTML – Experienced</li>
+          <li>CSS – Experienced</li>
+          <li>JavaScript – Basic</li>
+          <li>Bootstrap – Experienced</li>
+        </ul>
+      </div>
+      <div class="bg-white shadow rounded-lg p-6">
+        <h3 class="text-xl font-semibold mb-4 text-center">Software Programmer</h3>
+        <ul class="space-y-2">
+          <li>Python – Experienced</li>
+          <li>C++ – Intermediate</li>
+          <li>PostgreSQL – Intermediate</li>
+          <li>Ruby on Rails – Experienced</li>
+          <li>R Studio – Experienced</li>
+          <li>GitHub – Experienced</li>
+        </ul>
+      </div>
+      <div class="bg-white shadow rounded-lg p-6">
+        <h3 class="text-xl font-semibold mb-4 text-center">Computer Engineering</h3>
+        <ul class="space-y-2">
+          <li>Repair and Testing – Experienced</li>
+          <li>Debugging – Experienced</li>
+          <li>Inspection – Experienced</li>
+        </ul>
+      </div>
     </div>
   </section>
-  
 
-  <script src="scripts.js"></script>
+  <!-- Projects Section -->
+  <section id="projects" class="py-20 px-8">
+    <div class="text-center mb-12">
+      <p class="text-lg text-gray-600">Browse my recent</p>
+      <h2 class="text-4xl font-bold">Projects</h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="bg-white border p-4 rounded-lg shadow">
+        <img src="assets/images/project1.png" alt="Project 1" class="rounded-md mb-4 w-full object-cover" />
+        <h3 class="text-lg font-semibold mb-2">Gratitude 10q Tigers</h3>
+        <a href="https://github.com/uofm-capstone/fall2024_10q_tigers" class="block text-center bg-gray-800 text-white py-2 rounded hover:bg-black">GitHub</a>
+      </div>
+      <div class="bg-white border p-4 rounded-lg shadow">
+        <img src="assets/images/project2.png" alt="Project 2" class="rounded-md mb-4 w-full object-cover" />
+        <h3 class="text-lg font-semibold mb-2">Sensing Hexa</h3>
+        <a href="https://github.com/Danny080298/Sensing" class="block text-center bg-gray-800 text-white py-2 rounded hover:bg-black">GitHub</a>
+      </div>
+      <div class="bg-white border p-4 rounded-lg shadow">
+        <div class="h-48 bg-gray-100 rounded mb-4"></div>
+        <h3 class="text-lg font-semibold mb-2">In coming ...</h3>
+        <a href="#" class="block text-center bg-gray-800 text-white py-2 rounded hover:bg-black">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 px-8 bg-gray-50">
+    <div class="text-center mb-12">
+      <p class="text-lg text-gray-600">Get in Touch</p>
+      <h2 class="text-4xl font-bold">Contact Me</h2>
+    </div>
+    <div class="max-w-xl mx-auto">
+      <form action="https://formsubmit.co/dqngyen1@memphis.edu" method="POST" class="space-y-6">
+        <input type="hidden" name="_captcha" value="false">
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+          <input type="text" name="name" id="name" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300">
+        </div>
+        <div>   
+          <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+          <input type="email" name="email" id="email" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300">
+        </div>
+        <button type="submit" class="bg-gray-600 text-white px-6 py-2 rounded-md hover:bg-gray-700 transition">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="py-6 text-center text-gray-500">
+    <p>&copy; 2025 Danny Nguyen. All Rights Reserved.</p>
+  </footer>
 </body>
 </html>
